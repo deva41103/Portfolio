@@ -7,7 +7,17 @@ import {
     Layers,
     Database,
     BrainCircuit,
-    Filter
+    Filter,
+    TrendingUp,
+    Briefcase,
+    Plane,
+    Pill,
+    Film,
+    MessageCircle,
+    Image,
+    QrCode,
+    Heart,
+    User
 } from 'lucide-react';
 
 const PROJECTS = [
@@ -36,10 +46,110 @@ const PROJECTS = [
         desc: "Web application that converts speech to sign language skeleton poses using NLP and gloss-to-pose ML models. Winner of G.H. Raisoni Hackathon. Utilizes PyTorch for model inference and MediaPipe for pose generation.",
         tech: ["Flask", "PyTorch", "MediaPipe", "WebSockets", "NLP", "Python"],
         link: null,
-        github: "https://github.com/deva41103/Beyond-words.git",
+        github: "https://github.com/deva41103/Beyond_words.git",
         icon: <BrainCircuit className="w-8 h-8" />,
         category: "AI/ML",
         featured: true
+    },
+    {
+        title: "StockGPT",
+        desc: "An AI-powered stock market assistant that answers user queries and visualizes historical stock price trends. Supports chat-based interaction with backend-driven data processing and chart generation.",
+        tech: ["Python", "Flask", "Pandas", "NumPy", "Scikit-learn", "Matplotlib"],
+        link: null,
+        github: "https://github.com/deva41103/StockGPT",
+        icon: <TrendingUp className="w-8 h-8" />,
+        category: "AI/ML",
+        featured: false
+    },
+    {
+        title: "Freelancing Platform",
+        desc: "A full-stack freelancing web platform where clients post jobs and freelancers bid and collaborate. Implements authentication, role-based access, and database-driven workflows.",
+        tech: ["Python", "Flask", "HTML", "CSS", "Bootstrap", "MySQL", "SQLite"],
+        link: null,
+        github: "https://github.com/deva41103/Freelancing",
+        icon: <Briefcase className="w-8 h-8" />,
+        category: "Web App",
+        featured: false
+    },
+    {
+        title: "Travel Planner App",
+        desc: "A Flutter-based mobile application to help users plan trips and manage destinations efficiently. Uses REST APIs for dynamic data fetching and smooth user experience.",
+        tech: ["Flutter", "Dart", "REST APIs", "JSON"],
+        link: null,
+        github: "https://github.com/deva41103/travel_planner",
+        icon: <Plane className="w-8 h-8" />,
+        category: "Mobile App",
+        featured: false
+    },
+    {
+        title: "Medicine Alarm App",
+        desc: "A mobile application that reminds users to take medicines on time with a simple and clean UI. Built to support daily health management using scheduled alerts.",
+        tech: ["Flutter", "Dart"],
+        link: null,
+        github: "https://github.com/deva41103/medicine_alarm",
+        icon: <Pill className="w-8 h-8" />,
+        category: "Mobile App",
+        featured: false
+    },
+    {
+        title: "Anime App",
+        desc: "A Flutter application that displays anime-related content using external APIs. Focuses on modern UI design and API-based dynamic content rendering.",
+        tech: ["Flutter", "Dart", "REST APIs"],
+        link: null,
+        github: "https://github.com/deva41103/Anime",
+        icon: <Film className="w-8 h-8" />,
+        category: "Mobile App",
+        featured: false
+    },
+    {
+        title: "Chat App",
+        desc: "A Flask-based web application enabling communication between two users. Implements backend routing, message handling, and frontend interaction.",
+        tech: ["Python", "Flask", "HTML", "CSS", "JavaScript"],
+        link: null,
+        github: "https://github.com/deva41103/Chatt_App",
+        icon: <MessageCircle className="w-8 h-8" />,
+        category: "Web App",
+        featured: false
+    },
+    {
+        title: "Image to URL Converter",
+        desc: "A web application that uploads images and converts them into accessible URLs. Built with Flask backend handling file uploads and routing.",
+        tech: ["Python", "Flask", "HTML", "CSS"],
+        link: null,
+        github: "https://github.com/deva41103/img_to_url",
+        icon: <Image className="w-8 h-8" />,
+        category: "Web App",
+        featured: false
+    },
+    {
+        title: "QR Code Generator",
+        desc: "A Flask-based web tool that generates QR codes from user input. Useful for sharing links and text in a fast and reliable way.",
+        tech: ["Python", "Flask", "HTML", "CSS"],
+        link: null,
+        github: "https://github.com/deva41103/QR_Generator",
+        icon: <QrCode className="w-8 h-8" />,
+        category: "Web App",
+        featured: false
+    },
+    {
+        title: "Aroyag Website",
+        desc: "A health-focused informational website designed to promote wellness and awareness. Features structured content, clean layout, and responsive design.",
+        tech: ["HTML", "CSS", "JavaScript"],
+        link: null,
+        github: "https://github.com/deva41103/Aroyag",
+        icon: <Heart className="w-8 h-8" />,
+        category: "Web App",
+        featured: false
+    },
+    {
+        title: "3D Avatar Generator",
+        desc: "A project that explores avatar generation using image processing techniques. Demonstrates fundamentals of computer vision and graphical transformation.",
+        tech: ["Python", "OpenCV", "NumPy", "Jupyter Notebook"],
+        link: null,
+        github: "https://github.com/deva41103/3d_avatar_generator",
+        icon: <User className="w-8 h-8" />,
+        category: "AI/ML",
+        featured: false
     }
 ];
 

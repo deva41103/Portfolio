@@ -42,7 +42,7 @@ const Footer = React.memo(function Footer() {
                                 <Code2 className="w-5 h-5 text-purple-400 group-hover:text-pink-400 transition-colors" />
                             </div>
                             <span className="text-lg font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-                                DevDhumal
+                                Devashish Dhumal
                             </span>
                         </Link>
                         <p className="text-gray-400 text-sm leading-relaxed max-w-xs">

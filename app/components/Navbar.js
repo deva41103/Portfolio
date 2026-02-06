@@ -51,7 +51,7 @@ function Navbar() {
                 <Code2 className="w-6 h-6 text-purple-400 group-hover:text-pink-400 transition-colors" />
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-                DevDhumal
+                Devashish Dhumal
               </span>
             </Link>
 

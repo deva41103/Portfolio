@@ -24,7 +24,7 @@ const SKILLS = {
         title: "Frameworks & Libraries",
         icon: Layers,
         color: "pink",
-        items: ["Flutter", "Next.js", "React", "Flask", "Django", "Tailwind CSS", "Bootstrap", "Framer Motion"]
+        items: ["Flutter", "Flask", "Django", "Bootstrap", "Tailwind CSS", "Framer Motion"]
     },
     databases: {
         title: "Databases & Backend",

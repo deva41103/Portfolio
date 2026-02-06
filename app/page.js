@@ -18,7 +18,7 @@ const DATA = {
   role: "B.Tech in Artificial Intelligence",
   location: "Nagpur, India",
   tagline: "Building Intelligence into Applications",
-  description: "I specialize in crafting robust AI/ML solutions and high-performance mobile applications using Flutter & Next.js.",
+  description: "I specialize in crafting robust AI/ML solutions and high-performance mobile applications using Flutter.",
 
   featuredProjects: [
     {
@@ -39,7 +39,7 @@ const DATA = {
       title: "AI Sign Language Generator",
       desc: "Web app converting speech to sign language skeleton poses using NLP and gloss-to-pose ML models.",
       tech: ["Flask", "PyTorch", "MediaPipe", "WebSockets"],
-      link: "https://github.com/deva41103/Beyond-words.git",
+      link: "https://github.com/deva41103/Beyond_words.git",
       icon: <BrainCircuit className="w-6 h-6" />
     }
   ]
@@ -132,7 +132,7 @@ export default function HomePage() {
             >
               {[
                 { icon: Smartphone, label: 'Flutter' },
-                { icon: Code2, label: 'Next.js' },
+                { icon: Code2, label: 'Flask' },
                 { icon: BrainCircuit, label: 'AI/ML' }
               ].map((item, index) => (
                 <div
