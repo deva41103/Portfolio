@@ -1,20 +1,21 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { Home, User, FileText, Briefcase, Mail, Menu } from 'lucide-react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { useLenis } from 'lenis/react';
 import { Button } from '@/components/ui/button';
 
 const navItems = [
-    { name: 'HOME', icon: Home, href: '#home' },
-    { name: 'ABOUT', icon: User, href: '#about' },
-    { name: 'RESUME', icon: FileText, href: '#resume' },
-    { name: 'PROJECTS', icon: Briefcase, href: '#projects' },
-    { name: 'CONTACT', icon: Mail, href: '#Footer' },
+    { name: 'HOME', icon: Home, href: '/#home' },
+    { name: 'ABOUT', icon: User, href: '/#about' },
+    { name: 'RESUME', icon: FileText, href: '/#resume' },
+    { name: 'PROJECTS', icon: Briefcase, href: '/#projects' },
+    { name: 'CONTACT', icon: Mail, href: '/#Footer' },
 ];
 
-function InteractiveIcon({ item, mouseY, activeSection, lenis }) {
+function InteractiveIcon({ item, mouseY, activeSection, lenis, pathname }) {
     const ref = useRef(null);
 
     const distance = useTransform(mouseY, (val) => {
@@ -30,20 +31,22 @@ function InteractiveIcon({ item, mouseY, activeSection, lenis }) {
     const isActive = activeSection === item.name.toLowerCase();
 
     const handleScrollClick = (e, href) => {
-        if (href.startsWith('#')) {
+        const isHomePage = pathname === '/';
+        if (isHomePage && href.startsWith('/#')) {
             e.preventDefault();
+            const targetHash = href.replace('/', '');
             if (lenis) {
-                if (href === '#home') {
+                if (targetHash === '#home') {
                     lenis.scrollTo(0);
                 } else {
-                    lenis.scrollTo(href);
+                    lenis.scrollTo(targetHash);
                 }
             } else {
                 // Fallback if lenis is not ready
-                const element = document.querySelector(href);
+                const element = document.querySelector(targetHash);
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth' });
-                } else if (href === '#home') {
+                } else if (targetHash === '#home') {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             }
@@ -82,6 +85,7 @@ function InteractiveIcon({ item, mouseY, activeSection, lenis }) {
 }
 
 export default function FloatingNav() {
+    const pathname = usePathname();
     const mouseY = useMotionValue(Infinity);
     const [activeSection, setActiveSection] = useState('home');
     const [isVisible, setIsVisible] = useState(false);
@@ -128,6 +132,11 @@ export default function FloatingNav() {
 
     useEffect(() => {
         const handleScroll = () => {
+            if (pathname !== '/') {
+                setActiveSection('');
+                return;
+            }
+            
             const sections = ['home', 'about', 'resume', 'projects', 'contact'];
             let current = 'home';
             for (const section of sections) {
@@ -202,7 +211,7 @@ export default function FloatingNav() {
                                     className="bg-gray-100/50 dark:bg-black/40 backdrop-blur-3xl border border-white/60 dark:border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.1),inset_0_0_0_1px_rgba(255,255,255,0.5)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.4),inset_0_0_0_1px_rgba(255,255,255,0.05)] rounded-full py-2 px-4 md:py-3 md:px-2 flex flex-row md:flex-col gap-2 relative overflow-visible"
                                 >
                                     {navItems.map((item, index) => (
-                                        <InteractiveIcon item={item} key={index} mouseY={mouseY} activeSection={activeSection} lenis={lenis} />
+                                        <InteractiveIcon item={item} key={index} mouseY={mouseY} activeSection={activeSection} lenis={lenis} pathname={pathname} />
                                     ))}
                                 </motion.div>
                             )}

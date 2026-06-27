@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import emailjs from '@emailjs/browser';
 
 export default function Footer() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,32 +34,27 @@ export default function Footer() {
         setIsSubmitting(true);
 
         try {
-            // NOTE TO USER: Replace these 3 string placeholders with your actual EmailJS credentials
-            const serviceId = "YOUR_SERVICE_ID";
-            const templateId = "YOUR_TEMPLATE_ID";
-            const publicKey = "YOUR_PUBLIC_KEY";
+            const response = await fetch("https://formsubmit.co/ajax/devashishdhumal@gmail.com", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    message: formData.message,
+                    _subject: "New Message from Portfolio Website!"
+                })
+            });
 
-            // Prevent sending dummy emails if not configured
-            if (serviceId === "YOUR_SERVICE_ID") {
-                await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
-                toast.success("Message sent successfully! (Simulated - Configure EmailJS to send real emails)");
-            } else {
-                await emailjs.send(
-                    serviceId,
-                    templateId,
-                    {
-                        from_name: formData.name,
-                        reply_to: formData.email,
-                        message: formData.message,
-                        to_name: "Devashish"
-                    },
-                    publicKey
-                );
+            if (response.ok) {
                 toast.success("Message sent successfully!");
+                // Reset form
+                setFormData({ name: '', email: '', message: '' });
+            } else {
+                throw new Error("Failed to send");
             }
-
-            // Reset form
-            setFormData({ name: '', email: '', message: '' });
         } catch (error) {
             console.error("FAILED TO SEND EMAIL", error);
             toast.error("Failed to send message. Please try again later.");

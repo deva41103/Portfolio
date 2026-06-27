@@ -1,54 +1,162 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowLeft, ExternalLink, Github, Layers, Database, BrainCircuit, TrendingUp, Briefcase, Plane, Pill, Film, MessageCircle, Image as ImageIcon, QrCode, Heart, User } from 'lucide-react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
-import { SiPython, SiHtml5, SiJavascript, SiJupyter, SiDart } from 'react-icons/si';
-import { FaCode, FaCog } from 'react-icons/fa';
+import React from 'react';
 
-const allProjects = [
-    { title: "career_guidance", tech: "Python", updated: "5 days ago", type: "Public", color: "from-blue-400 to-indigo-600" },
-    { title: "Aroyag", tech: "HTML", updated: "last week", type: "Public", color: "from-emerald-400 to-green-600" },
-    { title: "Portfolio", tech: "JavaScript", updated: "3 weeks ago", type: "Public", color: "from-amber-400 to-orange-600" },
-    { title: "StockGPT", tech: "Jupyter Notebook", updated: "3 weeks ago", type: "Public", color: "from-purple-400 to-fuchsia-600" },
-    { title: "medicine_alarm", tech: "HTML", updated: "Jan 19", type: "Public", color: "from-rose-400 to-red-600" },
-    { title: "3d_avatar_generator", tech: "Jupyter Notebook", updated: "Jan 14", type: "Public", color: "from-cyan-400 to-blue-600" },
-    { title: "travel_planner", tech: "Dart", updated: "Jan 10", type: "Public", color: "from-sky-400 to-indigo-600" },
-    { title: "Chatt_App", tech: "HTML", updated: "Dec 30, 2025", type: "Public", desc: "Forked from DishantShahare358/Chatt_App", color: "from-pink-400 to-rose-600" },
-    { title: "communication", tech: "HTML", updated: "Dec 30, 2025", type: "Public", color: "from-violet-400 to-purple-600" },
-    { title: "Anime", tech: "Dart", updated: "Dec 24, 2025", type: "Public", color: "from-fuchsia-400 to-pink-600" },
-    { title: "Beyond_words", tech: "Jupyter Notebook", updated: "Dec 11, 2025", type: "Public", color: "from-teal-400 to-emerald-600" },
-    { title: "deva41103", tech: "config", updated: "Dec 11, 2025", type: "Public", desc: "Config files for my GitHub profile.", color: "from-gray-400 to-gray-600" },
-    { title: "Freelancing", tech: "HTML", updated: "Dec 11, 2025", type: "Public", desc: "The Freelancing Platform is the project developed using python having Flask as a Framework and Sql as a database.", color: "from-blue-500 to-cyan-600" },
-    { title: "demo", tech: "Other", updated: "Sep 10, 2025", type: "Public", color: "from-orange-400 to-red-600" },
-    { title: "QR_Generator", tech: "HTML", updated: "Sep 9, 2025", type: "Public", color: "from-indigo-400 to-purple-600" },
-    { title: "dev", tech: "Python", updated: "Sep 9, 2025", type: "Public", color: "from-blue-600 to-indigo-800" },
-    { title: "hackthon", tech: "Python", updated: "Aug 24, 2025", type: "Public", color: "from-green-500 to-emerald-700" },
-    { title: "img_to_url", tech: "HTML", updated: "Aug 6, 2025", type: "Public", color: "from-cyan-500 to-teal-700" },
-    { title: "api_integration", tech: "Dart", updated: "Jul 9, 2025", type: "Public", color: "from-indigo-500 to-blue-700" },
-    { title: "Flipkart", tech: "Dart", updated: "Jul 6, 2025", type: "Public", color: "from-yellow-400 to-orange-600" },
-    { title: "PRODIGY_ML_05", tech: "Jupyter Notebook", updated: "Jun 19, 2024", type: "Public", color: "from-violet-500 to-purple-700" },
-    { title: "PRODIGY_ML_04", tech: "Jupyter Notebook", updated: "Jun 17, 2024", type: "Public", color: "from-violet-500 to-purple-700" },
-    { title: "PRODIGY_ML_03", tech: "Jupyter Notebook", updated: "Jun 17, 2024", type: "Public", color: "from-violet-500 to-purple-700" },
-    { title: "PRODIGY_ML_02", tech: "Jupyter Notebook", updated: "Jun 16, 2024", type: "Public", color: "from-violet-500 to-purple-700" },
-    { title: "PRODIGY_ML_01", tech: "Jupyter Notebook", updated: "Jun 16, 2024", type: "Public", color: "from-violet-500 to-purple-700" },
+const PROJECTS = [
+    {
+        title: "Hyreso App",
+        desc: "Modern job-hiring platform featuring smart filters, recruiter dashboards, and AI interview assistance. Built with Flutter for cross-platform compatibility and Supabase for real-time database management.",
+        tech: ["Flutter", "Dart", "Supabase", "AI APIs", "REST APIs"],
+        link: "https://play.google.com/store/apps/details?id=com.hyreso.app",
+        github: null,
+        icon: <Layers />,
+        category: "Mobile App",
+        featured: true,
+        color: "from-teal-400 to-emerald-600"
+    },
+    {
+        title: "Crop Bazar",
+        desc: "Agritech marketplace connecting farmers and traders with real-time mandi prices and logistics support. Integrated payment gateway and maps API for seamless user experience.",
+        tech: ["Flutter", "REST APIs", "Payment Gateway", "Maps API", "Firebase"],
+        link: "https://play.google.com/store/apps/details?id=com.thecropbazar.market",
+        github: null,
+        icon: <Database />,
+        category: "Mobile App",
+        featured: true,
+        color: "from-green-400 to-green-700"
+    },
+    {
+        title: "AI Sign Language Generator",
+        desc: "Web application that converts speech to sign language skeleton poses using NLP and gloss-to-pose ML models. Winner of G.H. Raisoni Hackathon. Utilizes PyTorch for model inference and MediaPipe for pose generation.",
+        tech: ["Flask", "PyTorch", "MediaPipe", "WebSockets", "NLP", "Python"],
+        link: null,
+        github: "https://github.com/deva41103/Beyond_words.git",
+        icon: <BrainCircuit />,
+        category: "AI/ML",
+        featured: true,
+        color: "from-indigo-500 to-blue-600"
+    },
+    {
+        title: "StockGPT",
+        desc: "An AI-powered stock market assistant that answers user queries and visualizes historical stock price trends. Supports chat-based interaction with backend-driven data processing and chart generation.",
+        tech: ["Python", "Flask", "Pandas", "NumPy", "Scikit-learn", "Matplotlib"],
+        link: null,
+        github: "https://github.com/deva41103/StockGPT",
+        icon: <TrendingUp />,
+        category: "AI/ML",
+        featured: false,
+        color: "from-purple-400 to-fuchsia-600"
+    },
+    {
+        title: "Freelancing Platform",
+        desc: "A full-stack freelancing web platform where clients post jobs and freelancers bid and collaborate. Implements authentication, role-based access, and database-driven workflows.",
+        tech: ["Python", "Flask", "HTML", "CSS", "Bootstrap", "MySQL", "SQLite"],
+        link: null,
+        github: "https://github.com/deva41103/Freelancing",
+        icon: <Briefcase />,
+        category: "Web App",
+        featured: false,
+        color: "from-blue-500 to-cyan-600"
+    },
+    {
+        title: "Travel Planner App",
+        desc: "A Flutter-based mobile application to help users plan trips and manage destinations efficiently. Uses REST APIs for dynamic data fetching and smooth user experience.",
+        tech: ["Flutter", "Dart", "REST APIs", "JSON"],
+        link: null,
+        github: "https://github.com/deva41103/travel_planner",
+        icon: <Plane />,
+        category: "Mobile App",
+        featured: false,
+        color: "from-sky-400 to-indigo-600"
+    },
+    {
+        title: "Medicine Alarm App",
+        desc: "A mobile application that reminds users to take medicines on time with a simple and clean UI. Built to support daily health management using scheduled alerts.",
+        tech: ["Flutter", "Dart"],
+        link: null,
+        github: "https://github.com/deva41103/medicine_alarm",
+        icon: <Pill />,
+        category: "Mobile App",
+        featured: false,
+        color: "from-rose-400 to-red-600"
+    },
+    {
+        title: "Anime App",
+        desc: "A Flutter application that displays anime-related content using external APIs. Focuses on modern UI design and API-based dynamic content rendering.",
+        tech: ["Flutter", "Dart", "REST APIs"],
+        link: null,
+        github: "https://github.com/deva41103/Anime",
+        icon: <Film />,
+        category: "Mobile App",
+        featured: false,
+        color: "from-fuchsia-400 to-pink-600"
+    },
+    {
+        title: "Chat App",
+        desc: "A Flask-based web application enabling communication between two users. Implements backend routing, message handling, and frontend interaction.",
+        tech: ["Python", "Flask", "HTML", "CSS", "JavaScript"],
+        link: null,
+        github: "https://github.com/deva41103/Chatt_App",
+        icon: <MessageCircle />,
+        category: "Web App",
+        featured: false,
+        color: "from-pink-400 to-rose-600"
+    },
+    {
+        title: "Image to URL Converter",
+        desc: "A web application that uploads images and converts them into accessible URLs. Built with Flask backend handling file uploads and routing.",
+        tech: ["Python", "Flask", "HTML", "CSS"],
+        link: null,
+        github: "https://github.com/deva41103/img_to_url",
+        icon: <ImageIcon />,
+        category: "Web App",
+        featured: false,
+        color: "from-cyan-500 to-teal-700"
+    },
+    {
+        title: "QR Code Generator",
+        desc: "A Flask-based web tool that generates QR codes from user input. Useful for sharing links and text in a fast and reliable way.",
+        tech: ["Python", "Flask", "HTML", "CSS"],
+        link: null,
+        github: "https://github.com/deva41103/QR_Generator",
+        icon: <QrCode />,
+        category: "Web App",
+        featured: false,
+        color: "from-indigo-400 to-purple-600"
+    },
+    {
+        title: "Aroyag Website",
+        desc: "A health-focused informational website designed to promote wellness and awareness. Features structured content, clean layout, and responsive design.",
+        tech: ["HTML", "CSS", "JavaScript"],
+        link: null,
+        github: "https://github.com/deva41103/Aroyag",
+        icon: <Heart />,
+        category: "Web App",
+        featured: false,
+        color: "from-emerald-400 to-green-600"
+    },
+    {
+        title: "3D Avatar Generator",
+        desc: "A project that explores avatar generation using image processing techniques. Demonstrates fundamentals of computer vision and graphical transformation.",
+        tech: ["Python", "OpenCV", "NumPy", "Jupyter Notebook"],
+        link: null,
+        github: "https://github.com/deva41103/3d_avatar_generator",
+        icon: <User />,
+        category: "AI/ML",
+        featured: false,
+        color: "from-violet-500 to-purple-700"
+    }
 ];
 
-const getTechIcon = (techName) => {
-    switch (techName.toLowerCase()) {
-        case 'python': return <SiPython className="text-[#3776AB]" />;
-        case 'html': return <SiHtml5 className="text-[#E34F26]" />;
-        case 'javascript': return <SiJavascript className="text-[#F7DF1E]" />;
-        case 'jupyter notebook': return <SiJupyter className="text-[#F37626]" />;
-        case 'dart': return <SiDart className="text-[#0175C2]" />;
-        case 'config': return <FaCog className="text-zinc-500" />;
-        default: return <FaCode className="text-emerald-500" />;
-    }
-};
+const categories = ["All", "Mobile App", "AI/ML", "Web App"];
 
 export default function MoreProjects() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [activeCategory, setActiveCategory] = useState("All");
 
     // Custom cursor tracker
     useEffect(() => {
@@ -81,6 +189,8 @@ export default function MoreProjects() {
 
         return () => lenis.destroy();
     }, []);
+
+    const filteredProjects = PROJECTS.filter(p => activeCategory === "All" || p.category === activeCategory);
 
     return (
         <section className="min-h-screen bg-zinc-50 dark:bg-[#0a0a0a] text-foreground relative overflow-hidden selection:bg-[#106c57]/30 dark:selection:bg-emerald-500/30">
@@ -131,13 +241,13 @@ export default function MoreProjects() {
                 <div
                     className="absolute inset-0 z-0 opacity-20 dark:opacity-30 pointer-events-none mix-blend-multiply dark:mix-blend-screen transition-opacity duration-500"
                     style={{
-                        backgroundImage: "url('/sketch.png')", // <-- Update this path!
+                        backgroundImage: "url('/sketch.png')",
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
                     }}
                 />
-                <div className="max-w-4xl">
+                <div className="max-w-4xl relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -146,7 +256,7 @@ export default function MoreProjects() {
                     >
                         <div className="h-[1px] w-12 bg-[#106c57]/30 dark:bg-emerald-400/30"></div>
                         <span className="text-sm font-semibold tracking-[0.3em] uppercase opacity-70 text-[#106c57] dark:text-emerald-400">
-                            Github Archives
+                            Project Showcase
                         </span>
                         <div className="h-[1px] w-12 bg-[#106c57]/30 dark:bg-emerald-400/30"></div>
                     </motion.div>
@@ -167,10 +277,32 @@ export default function MoreProjects() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1, delay: 0.4 }}
-                        className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 font-mono tracking-tight max-w-2xl mx-auto"
+                        className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 font-mono tracking-tight max-w-2xl mx-auto mb-12"
                     >
-                        Dive into {allProjects.length} open-source repositories, experiments, and full-stack projects built over the years.
+                        Explore a collection of {PROJECTS.length} applications, tools, and experiments I've built to solve complex problems.
                     </motion.p>
+
+                    {/* Category Filter */}
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.5 }}
+                        className="flex flex-wrap justify-center gap-3 md:gap-4 mb-8 relative z-20"
+                    >
+                        {categories.map((cat) => (
+                            <button
+                                key={cat}
+                                onClick={() => setActiveCategory(cat)}
+                                className={`px-6 py-2.5 rounded-full font-mono uppercase tracking-widest text-xs md:text-sm transition-all duration-300 border ${
+                                    activeCategory === cat 
+                                    ? 'bg-[#106c57] border-[#106c57] text-white dark:bg-emerald-500 dark:border-emerald-500 shadow-[0_0_15px_rgba(16,108,87,0.4)] dark:shadow-[0_0_15px_rgba(52,211,153,0.4)]'
+                                    : 'bg-white/50 dark:bg-black/50 border-zinc-200 dark:border-white/10 text-zinc-600 dark:text-zinc-400 hover:border-[#106c57]/50 dark:hover:border-emerald-400/50 hover:text-zinc-900 dark:hover:text-white backdrop-blur-sm'
+                                }`}
+                            >
+                                {cat}
+                            </button>
+                        ))}
+                    </motion.div>
 
                     {/* Animated Scroll Mouse Indicator */}
                     <motion.div
@@ -192,10 +324,14 @@ export default function MoreProjects() {
             </header>
 
             {/* Alternating Zig-Zag Layout */}
-            <main className="relative z-10 px-6 md:px-12 pb-48 max-w-6xl mx-auto flex flex-col gap-32 md:gap-48 mt-12">
-                {allProjects.map((project, idx) => (
-                    <ProjectRow key={idx} project={project} index={idx} />
-                ))}
+            <main className="relative z-10 px-6 md:px-12 pb-48 max-w-6xl mx-auto mt-12">
+                <div className="flex flex-col gap-32 md:gap-48">
+                    <AnimatePresence mode="popLayout">
+                        {filteredProjects.map((project, idx) => (
+                            <ProjectRow key={project.title} project={project} index={idx} />
+                        ))}
+                    </AnimatePresence>
+                </div>
             </main>
         </section>
     );
@@ -204,11 +340,13 @@ export default function MoreProjects() {
 // Normal Scrolling Alternating Row Component
 function ProjectRow({ project, index }) {
     const isEven = index % 2 === 0;
-    const description = project.desc || `An interactive ${project.tech} repository showcasing modern programming practices, clean architecture, and responsive design.`;
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            layout
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -50, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -218,35 +356,54 @@ function ProjectRow({ project, index }) {
             <div className="flex-1 flex flex-col items-start text-left w-full order-2 md:order-none">
                 <div className="flex items-center gap-3 mb-6">
                     <span className="text-xs font-mono font-semibold text-zinc-600 dark:text-zinc-300 bg-zinc-200/60 dark:bg-white/10 px-4 py-1.5 rounded-full border border-zinc-300 dark:border-white/10 uppercase tracking-wider shadow-sm">
-                        {project.type}
+                        {project.category}
                     </span>
-                    <span className="text-xs text-zinc-500 dark:text-zinc-500 font-mono uppercase font-medium">
-                        Updated {project.updated}
-                    </span>
+                    {project.featured && (
+                        <span className="text-xs text-[#106c57] dark:text-emerald-400 font-mono uppercase font-bold tracking-widest flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-[#106c57] dark:bg-emerald-400 animate-pulse"></span>
+                            Featured
+                        </span>
+                    )}
                 </div>
 
                 <h3 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-zinc-900 dark:text-white mb-6 leading-[1.1]">
                     {project.title}
                 </h3>
 
-                <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed mb-10 max-w-xl font-medium">
-                    {description}
+                <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8 max-w-xl font-medium">
+                    {project.desc}
                 </p>
 
-                <div className="flex flex-wrap items-center gap-6 mt-auto">
-                    <div className="flex items-center gap-3 px-4 py-2 bg-zinc-100 dark:bg-zinc-900/50 rounded-full border border-zinc-200 dark:border-zinc-800">
-                        <span className={`w-3 h-3 rounded-full bg-gradient-to-br ${project.color} shadow-sm`}></span>
-                        <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{project.tech}</span>
-                    </div>
+                <div className="flex flex-wrap gap-2 mb-10">
+                    {project.tech.map((t) => (
+                        <span key={t} className="px-3 py-1.5 bg-black/5 dark:bg-white/5 text-xs font-mono uppercase tracking-wider rounded-md opacity-80 text-zinc-800 dark:text-zinc-200 font-semibold border border-black/5 dark:border-white/5">
+                            {t}
+                        </span>
+                    ))}
+                </div>
 
-                    <a
-                        href={`https://github.com/deva41103/${project.title}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-black px-8 py-3.5 rounded-full font-bold text-sm tracking-wide hover:scale-105 transition-transform shadow-lg hover:shadow-xl dark:shadow-[0_0_15px_rgba(255,255,255,0.2)]"
-                    >
-                        View Repository <ExternalLink size={16} />
-                    </a>
+                <div className="flex flex-wrap items-center gap-4 mt-auto">
+                    {project.link && (
+                        <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 bg-[#106c57] dark:bg-emerald-500 text-white px-8 py-3.5 rounded-full font-bold text-sm tracking-wide hover:scale-105 transition-transform shadow-lg hover:shadow-xl hover:bg-[#0d5948] dark:hover:bg-emerald-400"
+                        >
+                            Live Preview <ExternalLink size={16} />
+                        </a>
+                    )}
+                    
+                    {project.github && (
+                        <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-black px-8 py-3.5 rounded-full font-bold text-sm tracking-wide hover:scale-105 transition-transform shadow-lg hover:shadow-xl dark:shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+                        >
+                            Source Code <Github size={16} />
+                        </a>
+                    )}
                 </div>
             </div>
 
@@ -262,19 +419,16 @@ function ProjectRow({ project, index }) {
 
                     {/* Big Central Tech Icon */}
                     <motion.div
-                        className="relative z-10 opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-2xl"
+                        className="relative z-10 opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-2xl text-zinc-800 dark:text-white"
                         whileHover={{ scale: 1.1, rotate: Math.random() > 0.5 ? 5 : -5 }}
                         transition={{ type: "spring", stiffness: 300, damping: 15 }}
                     >
-                        <div className="text-[140px] md:text-[180px] text-zinc-800 dark:text-white drop-shadow-[0_20px_20px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)]">
-                            {getTechIcon(project.tech)}
-                        </div>
+                        {/* Clone the icon element to make it massive to fit the design */}
+                        {React.cloneElement(project.icon, {
+                            className: "w-[120px] h-[120px] md:w-[160px] md:h-[160px] drop-shadow-[0_20px_20px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)]",
+                            strokeWidth: 1.5
+                        })}
                     </motion.div>
-
-                    {/* Github overlay icon hovering top right */}
-                    <div className="absolute top-6 right-6 p-4 rounded-2xl bg-white/80 dark:bg-black/80 backdrop-blur-md border border-zinc-200 dark:border-white/10 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-xl">
-                        <Github size={28} className="text-zinc-800 dark:text-white" />
-                    </div>
                 </div>
             </div>
         </motion.div>

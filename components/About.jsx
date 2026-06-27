@@ -36,7 +36,7 @@ const educationData = [
         institution: "New English Junior College",
         year: "2022",
         score: "70.67%",
-        img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop", // Graduation placeholder
+        img: "/hsc_education.png", // Newly generated image for HSC
         rotate: "rotate-3",
         color: "bg-zinc-50",
     },
@@ -205,7 +205,7 @@ export default function About() {
 
                                     {/* The "Film/Photo" area */}
                                     <div className={`relative w-full aspect-video ${edu.color} mb-4 overflow-hidden border border-zinc-200 dark:border-zinc-800`}>
-                                        <img src={edu.img} alt={edu.degree} className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply dark:mix-blend-screen grayscale-[30%] contrast-125" />
+                                        <img src={edu.img} alt={edu.degree} className="absolute inset-0 w-full h-full object-cover opacity-90 grayscale-[20%] contrast-110" />
 
                                         {/* Subtle film grain overlay */}
                                         <div className="absolute inset-0 bg-black/5 dark:bg-white/5"></div>

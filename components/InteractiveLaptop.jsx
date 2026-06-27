@@ -14,7 +14,7 @@ import { ReactLenis } from 'lenis/react';
 
 export default function InteractiveLaptop() {
     const [windowState, setWindowState] = useState('open'); // 'open', 'minimized', 'closed'
-    const [isFullscreen, setIsFullscreen] = useState(false);
+    const [isFullscreen, setIsFullscreen] = useState(true);
     const [activeTab, setActiveTab] = useState('resume'); // 'dashboard', 'resume'
 
     return (

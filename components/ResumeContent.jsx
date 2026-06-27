@@ -12,6 +12,12 @@ const skills = [
 
 const experience = [
     {
+        role: "Flutter Developer Intern",
+        company: "Epidise HealthCare",
+        duration: "2 months",
+        description: "Gained hands-on experience with FLUTTER and build 2 MVP apps."
+    },
+    {
         role: "Full Stack Developer",
         company: "Dataventics Software Solutions",
         duration: "6 months",
